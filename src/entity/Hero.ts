@@ -22,6 +22,9 @@ export class Hero {
   @Column({nullable: true})
   address: string;
 
+  @Column({nullable: true})
+  photo: string;
+
   @CreateDateColumn()
   created: Date;
 
