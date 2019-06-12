@@ -28,4 +28,14 @@ export class UserController {
     result.total = total;
     res.send(result);
   }
+
+  static getHero = async (req, res) => {
+    console.log(req.params);
+    const {id} = req.params;
+
+    const options = {relations: ["powers"], where: [{id}], take: 1};
+
+    const hero = await getConnection().getRepository(Hero).find(options);
+    res.send(hero);
+  }
 }
