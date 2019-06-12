@@ -29,4 +29,10 @@ export class AdminController {
 
     res.send(new ResultVo(0, 'success'));
   }
+
+  static addPhoto = async (req, res) => {
+    console.log(req.file);
+    res.send('success');
+  }
+
 }
