@@ -59,4 +59,44 @@ export class AdminController {
     res.send(result);
   }
 
+  static modifyHero = async (req, res) => {
+    const {id, name, email, sex, country, address, powers} = req.body;
+
+    const updateOption = {};
+    if (name) updateOption['name'] = name;
+    if (email) updateOption['email'] = email;
+    if (sex) updateOption['sex'] = sex;
+    if (country) updateOption['country'] = country;
+    if (address) updateOption['address'] = address;
+
+    // Hero update
+    await getConnection().createQueryBuilder().update(Hero)
+      .set(updateOption)
+      .where("id = :id", {id})
+      .execute()
+
+    // delete old powers
+    await getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(Power)
+      .where("heroId = :id", { id })
+      .execute();
+
+    // insert powers
+    if (powers && powers.length > 0) {
+      const hero = new Hero();
+      hero.id = id;
+      const newPowers = powers.map(power => {
+        const p = new Power();
+        p.name = power;
+        p.hero = hero;  // relation key
+        return p;
+      })
+      // bulk insert
+      await getConnection().createQueryBuilder().insert().into(Power).values(newPowers).execute();
+    }
+    const result = new ResultVo(0, 'success');
+    res.send(result);
+  }
 }

@@ -11,4 +11,6 @@ routes.post('/hero', AdminController.addHero);
 
 routes.post('/photo', upload.single('photo'), AdminController.addPhoto);
 
+routes.put('/hero', AdminController.modifyHero);
+
 export default routes;
