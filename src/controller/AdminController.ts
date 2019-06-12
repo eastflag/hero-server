@@ -2,6 +2,7 @@ import {Hero} from "../entity/Hero";
 import {getConnection} from "typeorm";
 import {Power} from "../entity/Power";
 import {ResultVo} from "../vo/ResultVo";
+import {s3} from "../config/aws";
 
 export class AdminController {
   static addHero = async (req, res) => {
@@ -32,7 +33,30 @@ export class AdminController {
 
   static addPhoto = async (req, res) => {
     console.log(req.file);
-    res.send('success');
+
+    // s3 upload configuring parameters
+    const params = {
+      Bucket: 'eastdb-burket',
+      Body : req.file.buffer,
+      Key : "photo/" + Date.now() + "_" + req.file.originalname,
+      ContentType: req.file.mimetype,
+      ACL: 'public-read'
+    };
+
+    let response, result;
+    try {
+      response = await s3.upload(params).promise();
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+      result = new ResultVo(500, 'S3 error');
+      res.send(result);
+    }
+
+    result = new ResultVo(0, 'success');
+    result.data = response.Location;
+
+    res.send(result);
   }
 
 }
