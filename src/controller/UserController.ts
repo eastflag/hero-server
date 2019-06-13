@@ -35,7 +35,7 @@ export class UserController {
 
     const options = {relations: ["powers"], where: [{id}], take: 1};
 
-    const hero = await getConnection().getRepository(Hero).find(options);
+    const hero = await getConnection().getRepository(Hero).findOne(options);
     res.send(hero);
   }
 }
