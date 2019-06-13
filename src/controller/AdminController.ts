@@ -99,4 +99,19 @@ export class AdminController {
     const result = new ResultVo(0, 'success');
     res.send(result);
   }
+
+  static removeHero = async (req, res) => {
+    console.log(req);
+    const {id} = req.query;
+
+    await getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(Hero)
+      .where("id = :id", { id })
+      .execute();
+
+    const result = new ResultVo(0, 'success');
+    res.send(result);
+  }
 }

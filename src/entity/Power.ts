@@ -9,6 +9,6 @@ export class Power {
   @Column({length: 50})
   name: string;
 
-  @ManyToOne(type => Hero, hero => hero.powers, {cascade: true})
+  @ManyToOne(type => Hero, hero => hero.powers, {onDelete: 'CASCADE', onUpdate: "CASCADE"})
   hero: Hero;
 }
