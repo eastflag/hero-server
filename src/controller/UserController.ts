@@ -9,7 +9,7 @@ export class UserController {
 
     const options = {};
     options['select'] = ["id", "name", "email", "photo"];
-    options['order'] = {id: 'desc'};
+    options['order'] = {id: 'DESC'};
     if (start_index) {
       options['skip'] = start_index;
     }
