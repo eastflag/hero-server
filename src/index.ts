@@ -2,6 +2,7 @@ import express from 'express';
 import router from './router';
 import bodyParser from 'body-parser';
 import {createConnection} from "typeorm";
+import cors from 'cors';
 import {Power} from "./entity/Power";
 import {Hero} from "./entity/Hero";
 
@@ -36,6 +37,8 @@ createConnection(/*...*/).then(async connection => {
 
   // start express server --------------------------------
   app.use(bodyParser());
+
+  app.use(cors());
 
   app.use('/api', router);
 
