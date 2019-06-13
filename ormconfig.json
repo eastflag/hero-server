@@ -1,12 +1,12 @@
 {
   "type": "mysql",
-  "host": "rds-eastflag-seoul.cjdc0dfw5jzh.ap-northeast-2.rds.amazonaws.com",
+  "host": "dklee-wizardlab-rds.cw0lylplxnmh.ap-northeast-2.rds.amazonaws.com",
   "port": 3306,
   "username": "admin",
-  "password": "12345678",
+  "password": "dklee987",
   "database": "eastdb",
-  "synchronize": true,
-  "logging": true,
+  "synchronize": false,
+  "logging": false,
   "entities": [
     "src/entity/**/*.ts"
   ],

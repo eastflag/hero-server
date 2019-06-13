@@ -10,7 +10,7 @@ const app = express();
 createConnection(/*...*/).then(async connection => {
 
   // test data -------------------------------------------------------------------------------------------------------
-  console.log("Inserting a new hero into the database...");
+/*  console.log("Inserting a new hero into the database...");
 
   let power1 = new Power();
   power1.name = "strength";
@@ -32,7 +32,7 @@ createConnection(/*...*/).then(async connection => {
   const result = await connection.getRepository(Hero).find({relations: ["powers"]});
   console.log("Loaded findHero: ", result);
 
-  console.log("Here you can setup and run express/koa/any other framework.");
+  console.log("Here you can setup and run express/koa/any other framework.");*/
 
   // start express server --------------------------------
   app.use(bodyParser());
