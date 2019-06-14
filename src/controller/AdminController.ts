@@ -60,7 +60,7 @@ export class AdminController {
   }
 
   static modifyHero = async (req, res) => {
-    const {id, name, email, sex, country, address, powers} = req.body;
+    const {id, name, email, sex, country, address, powers, photo} = req.body;
 
     const updateOption = {};
     if (name) updateOption['name'] = name;
@@ -68,6 +68,7 @@ export class AdminController {
     if (sex) updateOption['sex'] = sex;
     if (country) updateOption['country'] = country;
     if (address) updateOption['address'] = address;
+    if (photo) updateOption['photo'] = photo;
 
     // Hero update
     await getConnection().createQueryBuilder().update(Hero)
