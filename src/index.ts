@@ -1,8 +1,6 @@
 import express from 'express';
 import router from './router';
-import bodyParser from 'body-parser';
 import {createConnection} from "typeorm";
-import cors from 'cors';
 import {Power} from "./entity/Power";
 import {Hero} from "./entity/Hero";
 
@@ -35,10 +33,9 @@ createConnection(/*...*/).then(async connection => {
 
   console.log("Here you can setup and run express/koa/any other framework.");*/
 
-  // start express server --------------------------------
-  app.use(bodyParser());
-
-  app.use(cors());
+  // start express server --------------------------------------------------------------
+  // body-parser는 내장되어있음.  json 파싱하기 위해서 설정만 추가
+  app.use(express.json());
 
   app.use('/api', router);
 
