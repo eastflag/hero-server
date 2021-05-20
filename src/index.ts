@@ -1,6 +1,7 @@
 import express from 'express';
 import router from './router';
 import {createConnection} from "typeorm";
+import cors from "cors";
 import {Power} from "./entity/Power";
 import {Hero} from "./entity/Hero";
 
@@ -36,6 +37,7 @@ createConnection(/*...*/).then(async connection => {
   // start express server --------------------------------------------------------------
   // body-parser는 내장되어있음.  json 파싱하기 위해서 설정만 추가
   app.use(express.json());
+  app.use(cors());
 
   app.use('/api', router);
 
