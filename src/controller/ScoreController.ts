@@ -16,9 +16,14 @@ export class ScoreController {
 
     const score = new Score();
     score.name = name;
-    await getConnection().getRepository(Score).save(score);
+    const result = await getConnection().createQueryBuilder()
+      .insert()
+      .into(Score)
+      .values(score)
+      .execute();
 
-    res.send(new ResultVo(0, 'success'));
+    console.log(result);
+    res.send({id: result.raw.insertId, name, score: 0});
   }
 
   static removeScore = async (req, res) => {
